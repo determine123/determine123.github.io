@@ -1,0 +1,34 @@
+---
+import Base from "$layouts/Base.astro";
+import events from "../data/site-history.json";
+const groups = [...new Set(events.map(event => event.date.slice(0, 4)))];
+const dateLabel = (date: string) => date.length === 4 ? "年内" : new Intl.DateTimeFormat("zh-CN", {timeZone: "Asia/Shanghai", month: "2-digit", day: "2-digit"}).format(new Date(date));
+---
+<Base title="History · 建站历史" description="根据本人回忆与 GitHub 提交记录整理的 determine 博客建站历史。">
+  <main class="history">
+    <header>
+      <p class="eyebrow">BEHIND THE SITE</p>
+      <h1>History <span>建站历史</span></h1>
+      <p class="intro">从一页个人介绍，到写作、项目与生活的归档。这里记录这个网站如何一步步成为现在的样子。</p>
+      <p class="meta">{events.length} 个精选节点 · 日期按北京时间展示 · <a href="https://github.com/determine123/determine123.github.io/commits/main/">完整提交记录 ↗</a></p>
+    </header>
+    {groups.map(year => <section aria-labelledby={`year-${year}`}>
+      <h2 id={`year-${year}`}>{year}</h2>
+      <ol class="timeline">
+        {events.filter(event => event.date.startsWith(year)).map(event => <li>
+          {event.date.length === 4 ? <span class="year-only">年内</span> : <time datetime={event.date}>{dateLabel(event.date)}</time>}
+          <article>
+            <p class="category">{event.category}</p>
+            <h3>{event.title}</h3>
+            <p>{event.description}</p>
+            {event.sha ? <a class="evidence" href={`https://github.com/determine123/determine123.github.io/commit/${event.sha}`}>查看提交 {event.sha.slice(0,7)} ↗</a> : <span class="evidence">本人回忆 · 年份已确认</span>}
+          </article>
+        </li>)}
+      </ol>
+    </section>)}
+    <aside><h2>关于这份记录</h2><p>2023 年的构想来自本人回忆；其余节点根据博客仓库 main 分支的提交记录人工归纳，展示重要变化，而非逐条罗列提交。带提交链接的日期表示代码提交时间，不等同于功能首次上线或部署成功时间。</p><p>仓库继承的原模板历史不计入本人的建站经历；历史功能记录也不表示这些功能目前仍保持原样。内容最后核对：2026-10-27。</p><p><a href="/about/">About ↗</a> · <a href="/projects/">Projects ↗</a></p></aside>
+  </main>
+</Base>
+<style>
+.history{max-width:740px;width:100%;margin:2rem auto 0;padding:0 1rem;box-sizing:border-box}.eyebrow,.meta,.category,time,.evidence{font-family:var(--font-mono,monospace)}.eyebrow{font-size:.7rem;letter-spacing:.16em;color:var(--secondary-color)}h1{font-size:2rem;margin:.5rem 0 1rem}h1 span{font-size:1rem;font-weight:400;color:var(--secondary-color);margin-left:.5rem}.intro{max-width:36rem;line-height:1.9}.meta{font-size:.75rem;color:var(--secondary-color);line-height:1.9;margin:1rem 0 3rem}a{text-decoration:underline;text-underline-offset:3px}section>h2{font-size:1.4rem;margin:0 0 1.5rem}.timeline{list-style:none;padding:0;margin:0}.timeline li{display:grid;grid-template-columns:4rem minmax(0,1fr);gap:1rem}.timeline time,.year-only{font-size:.8rem;color:var(--secondary-color);padding-top:.2rem}.timeline article{position:relative;border-left:1px solid var(--block-color);padding:0 0 2rem 1.5rem;min-width:0}.timeline article:before{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:var(--secondary-color);left:-4px;top:.4rem}.category{font-size:.7rem;color:var(--secondary-color);margin:0 0 .3rem}h3{font-size:1.05rem;line-height:1.5;margin:0}article>p:not(.category){line-height:1.85;font-size:.9rem;margin:.5rem 0;color:var(--secondary-color)}.evidence{font-size:.72rem;overflow-wrap:anywhere}aside{border-top:1px solid var(--block-color);padding-top:1.5rem;margin-top:1rem;color:var(--secondary-color);font-size:.8rem;line-height:1.9}aside h2{font-size:.9rem}@media(max-width:480px){.history{margin-top:1rem}.timeline li{grid-template-columns:3rem minmax(0,1fr);gap:.5rem}.timeline article{padding-left:1rem}h1{font-size:1.7rem}}
+</style>

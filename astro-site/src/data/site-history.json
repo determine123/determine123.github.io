@@ -1,0 +1,156 @@
+[
+  {
+    "date": "2026-10-22T07:41:01Z",
+    "title": "迁移到 Astro ThoughtLite",
+    "description": "采用实际 ThoughtLite 模板，将文章、学习笔记和随笔迁入新界面，保留原有链接和评论路径。",
+    "category": "架构",
+    "sha": "74d20143d9ab925fa598c9f7c46df2d572d5d62e"
+  },
+  {
+    "date": "2026-10-21T02:13:59Z",
+    "title": "修复 Vercel 镜像发布",
+    "description": "使用构建后的站点输出发布镜像，让主站与 Vercel 共用内容来源。",
+    "category": "部署",
+    "sha": "bac21fcb643b8994e86b57ae9ae7efbfbbd03e88"
+  },
+  {
+    "date": "2026-10-20T13:54:25Z",
+    "title": "启用个人主页根域名",
+    "description": "主站迁移至 determine123.github.io，访问地址不再带 /determine/。",
+    "category": "部署",
+    "sha": "c8223ebe77b1c2241b1f4745e191ae0caaab1272"
+  },
+  {
+    "date": "2026-10-20T02:09:43Z",
+    "title": "导航统一为英文",
+    "description": "统一 Writing、Study、Projects、Footprints、Links 和 About 的入口名称。",
+    "category": "体验",
+    "sha": "5476a5cc68f710a485882894203c9c736c660889"
+  },
+  {
+    "date": "2026-10-19T08:33:37Z",
+    "title": "加入友链穿梭入口",
+    "description": "在友情链接中加入随机访问与 Travellings 入口，探索其他个人网站。",
+    "category": "功能",
+    "sha": "85a73cd144d1aaecd3eaca7898907b4f181d460d"
+  },
+  {
+    "date": "2026-10-19T05:26:04Z",
+    "title": "增加站点分发入口",
+    "description": "整理已验证的访问线路，在关于页提供镜像入口。",
+    "category": "部署",
+    "sha": "161b41cd74e0fe2a044c7be78a5449ae60864970"
+  },
+  {
+    "date": "2026-10-19T03:17:49Z",
+    "title": "回归简洁阅读布局",
+    "description": "将页面重心调整为内容与阅读，减少装饰对文章和信息层级的干扰。",
+    "category": "设计",
+    "sha": "dca1278f0ae9e839551c7f000e130920a6193545"
+  },
+  {
+    "date": "2026-10-16T02:38:10Z",
+    "title": "加入个人博客导航助手",
+    "description": "提供交互式站内导航入口，方便寻找文章与项目。",
+    "category": "功能",
+    "sha": "897e1221e3fd9d9de4dcbef081cd83dbfefee2de"
+  },
+  {
+    "date": "2026-10-16T02:08:41Z",
+    "title": "尝试深空交互主题",
+    "description": "探索星空、鼠标交互与全站主题效果，成为后来简洁改版之前的一次设计尝试。",
+    "category": "设计",
+    "sha": "9b078a3609e6cdfb6a02628da0aaa1063d1744ee"
+  },
+  {
+    "date": "2026-10-09T04:52:02Z",
+    "title": "使用真实内容与服务统计",
+    "description": "以已发布内容和在线服务数据展示站点统计，区分不同统计口径。",
+    "category": "功能",
+    "sha": "9ad7ff2dbadf5bde2b28776a3acc22a9bb0e9af0"
+  },
+  {
+    "date": "2026-10-06T03:19:30Z",
+    "title": "补充成都—西安旅记",
+    "description": "整理骑行与华山经历，加入相关城市足迹。",
+    "category": "内容",
+    "sha": "08055e70442181d7335510ce855b1ea1546a4cf0"
+  },
+  {
+    "date": "2026-10-06T02:42:35Z",
+    "title": "整理友情链接",
+    "description": "加入友链页面、导航和链接状态说明。",
+    "category": "功能",
+    "sha": "2680dde6c85783a34d833a8bfb2840888bf2c4b8"
+  },
+  {
+    "date": "2026-10-05T13:21:05Z",
+    "title": "扩展环海南岛旅记",
+    "description": "根据已备份相册补充骑行旅记，并加入城市代表照片。",
+    "category": "内容",
+    "sha": "1aa853291fdf265f75b02f1828581e7d407afc38"
+  },
+  {
+    "date": "2026-10-05T12:07:54Z",
+    "title": "细化 318 川藏线旅记",
+    "description": "整理沿途阶段、精选照片和城市记录，保留骑行中的人物与经历。",
+    "category": "内容",
+    "sha": "d213a6e016a9a8b09b63717b27a2c52e093b9277"
+  },
+  {
+    "date": "2026-10-05T08:16:28Z",
+    "title": "建立大学记录墙",
+    "description": "建立本科与研究生记录墙，并扩充航拍城市足迹。",
+    "category": "内容",
+    "sha": "9471363b4dd6bc30a339e75aa643947e8dce0c6a"
+  },
+  {
+    "date": "2026-10-03T14:27:03Z",
+    "title": "整理 QQ 空间随笔",
+    "description": "将已授权的文字内容按年份归档到博客，保留个人记忆。",
+    "category": "内容",
+    "sha": "23f1b18c2df346def67a18590cba519f01442f2b"
+  },
+  {
+    "date": "2026-10-03T05:39:12Z",
+    "title": "接入 Waline 评论",
+    "description": "启用评论后端，为文章和访客交流提供入口。",
+    "category": "功能",
+    "sha": "14a0b3ad4da649d342850caa08a60d896127ed58"
+  },
+  {
+    "date": "2026-10-03T02:02:06Z",
+    "title": "同步 GitHub 项目",
+    "description": "将公开 GitHub 项目整理到博客项目页，连接代码与工程记录。",
+    "category": "内容",
+    "sha": "8d970f72bde8f8f858c9a165d838b06e47b28ddf"
+  },
+  {
+    "date": "2026-10-02T08:36:05Z",
+    "title": "迁移 Hux 博客主题",
+    "description": "迁移到 Hux 主题，并加入项目阅读笔记。",
+    "category": "架构",
+    "sha": "cb2e95e3305634bfd240919b6182e6bacb6f214c"
+  },
+  {
+    "date": "2026-09-02T03:41:35Z",
+    "title": "改为个人学术主页",
+    "description": "从 VuePress 站点调整为 determine 个人主页。",
+    "category": "设计",
+    "sha": "cf96c10dfa958ecc9340cf54b531405cb7af2542"
+  },
+  {
+    "date": "2026-05-17T02:46:12Z",
+    "title": "开始个性化站点",
+    "description": "修改博客标题与描述，随后调整主题和部署配置。这是当前记录中可核实的本人建站起点，并非继承模板的最早提交。",
+    "category": "起点",
+    "sha": "4c3bd05e55c93fdd6b85d8faa62533ec1641e52d"
+  },
+  {
+    "date": "2023",
+    "title": "开始构想自己的博客",
+    "description": "从这一年开始考虑建立个人博客，希望拥有一个记录学习、项目和生活的地方。年份由本人确认，具体月份与日期未记录。",
+    "category": "构想",
+    "sha": null
+  }
+]
