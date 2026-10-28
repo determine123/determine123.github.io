@@ -25,8 +25,21 @@ def verify():
     assert home.find(id='blog-agent-dialog'), 'Missing preserved Agent'
     assert home.find(id='search-dialog'), 'Missing preserved search'
     assert home.find(id='global-music'), 'Missing preserved music player'
-    for route in ['/note/', '/learning/', '/jotting/', '/about/', '/projects/', '/links/', '/footprints/', '/sichuan-tibet-318/', '/hainan-island/', '/chengdu-xian/']:
+    for route in ['/note/', '/learning/', '/jotting/', '/about/', '/projects/', '/links/', '/footprints/', '/sichuan-tibet-318/', '/hainan-island/', '/chengdu-xian/', '/history/', '/listening/']:
         html(route)
+    music = json.loads((APP / 'src/data/qq-music.json').read_text(encoding='utf-8'))
+    listening = html('/listening/')
+    # Compare against the current snapshot, not hard-coded playlist/song counts.
+    song_links = listening.select('.songs a')
+    playlist_links = listening.select('.playlists a')
+    assert [a['href'] for a in song_links] == [
+        f"https://y.qq.com/n/ryqq_v2/songDetail/{song['mid']}" for song in music['songs']
+    ], 'Listening songs missing, reordered, or linked to the wrong track'
+    assert [a['href'] for a in playlist_links] == [
+        f"https://y.qq.com/n/ryqq_v2/playlist/{playlist['id']}" for playlist in music['playlists']
+    ], 'Listening playlists differ from the snapshot'
+    assert listening.select_one('time')['datetime'] == music['syncedAt'], 'Listening snapshot date differs'
+    assert music['report']['providedOn'] in listening.select_one('.report-note').get_text(), 'Missing report provenance date'
     for alias in aliases:
         original = '/' + alias['path'] + '/'
         redirect = html(original)
