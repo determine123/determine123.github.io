@@ -128,6 +128,14 @@
     "archived": false
   },
   {
+    "name": "shuiyuan-flow",
+    "html_url": "https://github.com/determine123/shuiyuan-flow",
+    "description": "源流 Shuiyuan Flow：参考 fluxdo 的水源社区非官方 Flutter 五端离线 MVP；真实社区接入待许可",
+    "language": "Dart",
+    "fork": false,
+    "archived": false
+  },
+  {
     "name": "SJTU_SignIn_Monitor",
     "html_url": "https://github.com/determine123/SJTU_SignIn_Monitor",
     "description": "Canvas attendance monitor and click-activated Edge extension",
