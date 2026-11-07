@@ -2,10 +2,10 @@
 from pathlib import Path
 import shutil
 
-source = Path('_site')
+source = Path('astro-site/dist')
 target = Path('.cloudflare-site')
 if not (source / 'index.html').is_file():
-    raise SystemExit('Build the Jekyll site before packaging.')
+    raise SystemExit('Build the Astro site before packaging.')
 if target.exists():
     raise SystemExit('Use a fresh output directory for each build.')
 shutil.copytree(source, target)
