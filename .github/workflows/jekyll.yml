@@ -68,6 +68,24 @@ jobs:
         run: pnpm --dir astro-site build
       - name: Verify content, aliases, widgets and photo resources
         run: python3 .github/scripts/verify_astro.py
+      - name: Restore bilingual translation cache
+        uses: actions/cache@v4
+        with:
+          path: ~/blog-translations
+          key: bilingual-v1-${{ github.sha }}
+          restore-keys: bilingual-v1-
+      - name: Generate English and Chinese editions
+        run: |
+          python3 -m pip install ctranslate2==4.8.5 sentencepiece
+          mkdir -p ~/blog-translations
+          cd ~/blog-translations
+          if [ ! -f model/translate-zh_en-1_9/model/model.bin ]; then
+            curl -fL --retry 4 https://argos-net.com/v1/translate-zh_en-1_9.argosmodel -o model.zip
+            echo '62e7af5a3a48b530e47b7b3e5c78c2de79073ecd815750d2bf3ab35b4a67da2d  model.zip' | sha256sum -c -
+            unzip -qo model.zip -d model
+          fi
+          cd "$GITHUB_WORKSPACE"
+          python3 .github/scripts/bilingual_site.py astro-site/dist ~/blog-translations/model ~/blog-translations/text.json
       - name: Upload verified Astro output
         uses: actions/upload-pages-artifact@v3
         with:
@@ -99,7 +117,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           html = Path('/tmp/blog-home.html').read_text(encoding='utf-8')
-          assert 'name="generator" content="Astro' in html, 'Homepage is not built by Astro'
+          assert re.search(r'<meta(?=[^>]*name="generator")(?=[^>]*content="Astro)[^>]*>', html), 'Homepage is not built by Astro'
           assert 'id="sidebar-open"' in html, 'Missing ThoughtLite navigation'
           assert 'id="page-content"' in html, 'Missing content container'
           assert 'id="global-music"' in html, 'Missing preserved music player'
@@ -151,7 +169,7 @@ jobs:
           path = sys.argv[2]
           assert not re.search(r'\{%|\{\{', html), f'{path} contains unrendered Jekyll Liquid'
           assert '<title>' in html.lower(), f'{path} is missing a rendered title'
-          assert 'name="generator" content="Astro' in html, f'{path} is not built by Astro'
+          assert re.search(r'<meta(?=[^>]*name="generator")(?=[^>]*content="Astro)[^>]*>', html), f'{path} is not built by Astro'
           if path == '/':
               assert 'id="sidebar-open"' in html, 'Missing native ThoughtLite navigation'
               assert 'id="blog-agent-open"' in html, 'Homepage is missing the blog Agent launcher'
