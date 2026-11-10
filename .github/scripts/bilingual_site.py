@@ -46,7 +46,7 @@ def translate(strings, cache, model, cache_file=None):
                 for offset in range(0, len(tokens), 180):
                     chunks.append(tokens[offset:offset + 180])
                     owners.append(i)
-        results = engine.translate_batch(chunks, beam_size=2, max_decoding_length=384)
+        results = engine.translate_batch(chunks, beam_size=2, max_decoding_length=384, replace_unknowns=True, no_repeat_ngram_size=4)
         outputs = [[] for _ in keys]
         for i, result in zip(owners, results):
             outputs[i].append("".join(result.hypotheses[0]).replace("\u2581", " ").strip())
