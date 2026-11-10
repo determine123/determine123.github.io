@@ -116,6 +116,7 @@ jobs:
           curl --fail --location --retry 4 --retry-all-errors --retry-delay 5 --connect-timeout 10 --max-time 30 "$PAGE_URL" -o /tmp/blog-home.html
           python3 - <<'PY'
           from pathlib import Path
+          import re
           html = Path('/tmp/blog-home.html').read_text(encoding='utf-8')
           assert re.search(r'<meta(?=[^>]*name="generator")(?=[^>]*content="Astro)[^>]*>', html), 'Homepage is not built by Astro'
           assert 'id="sidebar-open"' in html, 'Missing ThoughtLite navigation'
@@ -157,9 +158,9 @@ jobs:
         run: |
           set -euo pipefail
           base='https://determine-blog.vercel.app'
-          for path in / /learning/ /about/; do
+          for path in / /zh/ /learning/ /about/ /zh/about/; do
             file="$(mktemp)"
-            curl --fail --location --retry 4 --retry-all-errors --retry-delay 5 --connect-timeout 10 --max-time 30 "$base$path" -o "$file"
+            curl --fail --location --retry 4 --retry-all-errors --retry-delay 5 --connect-timeout 10 --max-time 30 "$base$path?release=$GITHUB_SHA" -o "$file"
             python3 - "$file" "$path" <<'PY'
           from pathlib import Path
           import re

@@ -89,6 +89,13 @@ def main():
         return url
 
     cache = json.loads(args.cache.read_text(encoding="utf8")) if args.cache.exists() else {}
+    cache.update({
+        "序章 | determine": "Prologue | determine",
+        "上海交通大学硕士在读，成都理工大学本科。Agent、AI Infra、学习与骑行记录。":
+            "Master’s student at Shanghai Jiao Tong University and graduate of Chengdu University of Technology. Notes on AI agents, AI infrastructure, learning and cycling.",
+        "。上海交通大学硕士在读，成都理工大学本科。":
+            ". I’m a master’s student at Shanghai Jiao Tong University and a graduate of Chengdu University of Technology.",
+    })
     strings = set()
     for page in pages:
         soup = BeautifulSoup(page.read_bytes(), "html.parser", from_encoding="utf-8")
