@@ -4,7 +4,7 @@ const fs = require('node:fs');
 
 const source = fs.readFileSync('workers/blog-agent/src/index.js', 'utf8');
 const origin = 'https://determine123.github.io';
-const env = { ALLOWED_ORIGIN: origin, ZHIPU_API_KEY: 'test-secret' };
+const env = { ALLOWED_ORIGIN: origin, SJTU_API_KEY: 'test-secret' };
 
 async function loadWorker() {
   const encoded = Buffer.from(source).toString('base64');
@@ -25,7 +25,7 @@ test('preflight permits only the configured blog origin', async () => {
   assert.equal(denied.status, 403);
 });
 
-test('chat uses the free GLM Flash model and never returns the provider key', async (t) => {
+test('chat uses the selected SJTU model and never returns the provider key', async (t) => {
   const worker = await loadWorker();
   const originalFetch = global.fetch;
   let upstreamRequest;
@@ -37,7 +37,7 @@ test('chat uses the free GLM Flash model and never returns the provider key', as
 
   const response = await worker.fetch(new Request('https://agent.example/api/agent', {
     method: 'POST', headers: { origin, 'content-type': 'application/json' },
-    body: JSON.stringify({ message: '介绍项目', history: [{ role: 'user', content: '我在看博客' }], context: [
+    body: JSON.stringify({ message: '介绍项目', model: 'qwen3.6-27b', history: [{ role: 'user', content: '我在看博客' }], context: [
       { title: '项目目录', url: `${origin}/projects/` },
       { title: 'untrusted external page', url: 'https://attacker.example/fake' },
     ] }),
@@ -46,11 +46,11 @@ test('chat uses the free GLM Flash model and never returns the provider key', as
 
   assert.equal(response.status, 200);
   assert.equal(data.answer, '你好，博客访客。');
-  assert.equal(data.model, 'glm-4.7-flash');
-  assert.equal(JSON.stringify(data).includes(env.ZHIPU_API_KEY), false);
-  assert.equal(upstreamRequest.url, 'https://open.bigmodel.cn/api/paas/v4/chat/completions');
+  assert.equal(data.model, 'qwen3.6-27b');
+  assert.equal(JSON.stringify(data).includes(env.SJTU_API_KEY), false);
+  assert.equal(upstreamRequest.url, 'https://models.sjtu.edu.cn/api/v1/chat/completions');
   assert.equal(upstreamRequest.options.headers.authorization, `Bearer ${env.ZHIPU_API_KEY}`);
-  assert.equal(upstreamRequest.body.model, 'glm-4.7-flash');
+  assert.equal(upstreamRequest.body.model, 'qwen3.6-27b');
   assert.match(upstreamRequest.body.messages[0].content, /项目目录/);
   assert.doesNotMatch(upstreamRequest.body.messages[0].content, /untrusted external page/);
   assert.deepEqual(upstreamRequest.body.messages[1], { role: 'user', content: '我在看博客' });
@@ -92,7 +92,7 @@ test('limits requests within a worker isolate', async () => {
       method: 'POST', headers: { origin, 'content-type': 'application/json', 'cf-connecting-ip': '198.51.100.7' },
       body: JSON.stringify({ message: 'hello' }),
     }), env);
-    for (let i = 0; i < 12; i++) assert.equal((await request()).status, 200);
+    for (let i = 0; i < 8; i++) assert.equal((await request()).status, 200);
     assert.equal((await request()).status, 429);
   } finally { global.fetch = originalFetch; }
 });
