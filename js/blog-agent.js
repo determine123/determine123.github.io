@@ -20,7 +20,7 @@
   if(intro&&config.description)intro.textContent=config.description;
   if(config.endpoint){
     if(status)status.textContent=`${config.model||'AI'} · 在线对话`;
-    if(privacy)privacy.textContent=`在线模式 · 问题会发送至智谱 AI（${config.model||'GLM Flash'}）处理；请勿输入隐私信息`;
+    if(privacy)privacy.textContent=`在线模式 · 问题会发送至上海交大模型服务（${config.model||'deepseek-chat'}）处理；请勿输入隐私信息`;
   }
   const index=[...document.querySelectorAll('#search-index a')];
   const byPath=fragment=>index.find(link=>new URL(link.href).pathname.includes(fragment));
@@ -71,7 +71,7 @@
   }
   async function askModel(text,history){
     const context=scoreMatches(text).slice(0,8).map(({link})=>({title:link.textContent.trim(),url:link.href}));
-    const response=await fetch(config.endpoint,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:text,context,history}),signal:AbortSignal.timeout(30_000),credentials:'omit',referrerPolicy:'no-referrer'});
+    const response=await fetch(config.endpoint,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:text,context,history,model:config.model||'deepseek-chat'}),signal:AbortSignal.timeout(30_000),credentials:'omit',referrerPolicy:'no-referrer'});
     let data;
     try{data=await response.json()}catch{throw new Error('模型服务返回了无法读取的响应。')}
     if(!response.ok)throw new Error(data.error||'模型服务暂时不可用。');
