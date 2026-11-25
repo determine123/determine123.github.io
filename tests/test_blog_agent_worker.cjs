@@ -49,7 +49,7 @@ test('chat uses the selected SJTU model and never returns the provider key', asy
   assert.equal(data.model, 'qwen3.6-27b');
   assert.equal(JSON.stringify(data).includes(env.SJTU_API_KEY), false);
   assert.equal(upstreamRequest.url, 'https://models.sjtu.edu.cn/api/v1/chat/completions');
-  assert.equal(upstreamRequest.options.headers.authorization, `Bearer ${env.ZHIPU_API_KEY}`);
+  assert.equal(upstreamRequest.options.headers.authorization, `Bearer ${env.SJTU_API_KEY}`);
   assert.equal(upstreamRequest.body.model, 'qwen3.6-27b');
   assert.match(upstreamRequest.body.messages[0].content, /项目目录/);
   assert.doesNotMatch(upstreamRequest.body.messages[0].content, /untrusted external page/);
