@@ -22,7 +22,11 @@ body_class: section-surface
 <figcaption>Shanghai, China<br><a href="mailto:determine@sjtu.edu.cn">determine@sjtu.edu.cn</a></figcaption>
 </figure>
 </section>
-<nav class="about-sections" aria-label="关于页目录"><a href="#interests">关注方向</a><a href="#selected-projects">精选项目</a><a href="#education">教育背景</a><a href="#github-activity">贡献日历</a><a href="#contributions">开源贡献</a><a href="#distribution">网页分发</a></nav>
+<nav class="about-sections" aria-label="关于页目录"><a href="#latest-content">最新内容</a><a href="#interests">关注方向</a><a href="#selected-projects">精选项目</a><a href="#education">教育背景</a><a href="#github-activity">贡献日历</a><a href="#contributions">开源贡献</a><a href="#distribution">网页分发</a></nav>
+
+<section class="about-section" id="latest-content"><h2>Latest Update <span>最新内容</span></h2>
+<article class="about-project"><div class="about-project-mark"><b>2026</b>HACKATHON</div><div><h3><a href="{{ '/2026/11/25/huzhou-intercity-hackathon-companyagent/' | relative_url }}">湖州黑客松 · CompanyAgent</a></h3><p class="about-meta">INTERCITY HACK 湖州站 · AI+办公赛道 · 2026.11</p><p>参与构建面向客户需求、AI 提案、授权数据与排期变更协同的企业 Agent 原型。公开评审页使用虚构数据，项目记录区分历史离线核验、合成演示与尚未完成的真实联调。</p><div class="about-project-links"><a href="{{ '/2026/11/25/huzhou-intercity-hackathon-companyagent/' | relative_url }}">阅读比赛记录 ↗</a><a href="https://github.com/determine123/CompanyAgent-INTERCITY-HACK-2026">GitHub 项目 ↗</a><a href="https://companyagent-intercity-hack-2026-production.up.railway.app/judge/" target="_blank" rel="noopener noreferrer">公开演示 ↗</a></div></div></article>
+</section>
 
 <section class="about-section" id="interests"><h2>Interests <span>关注方向</span></h2>
 <dl class="about-interest-grid"><div><dt>Agent Engineering</dt><dd>工具调用、RAG、记忆与工作流编排，以及可追踪的评估过程。</dd></div><div><dt>AI Infrastructure</dt><dd>推理效率、Triton 算子、跨后端实验与可复现的性能记录。</dd></div><div><dt>Embodied Intelligence</dt><dd>强化学习、仿真，以及智能系统的决策与控制。</dd></div></dl></section>
